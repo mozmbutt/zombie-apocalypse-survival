@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: ruby 2.6.8p205
 
-Things you may want to cover:
+* Rails Version: Rails 6.1.4.4
 
-* Ruby version
+* Configuration: run $ bundle install
 
-* System dependencies
+* Database: sqlite3
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Services (User Autherization, Relationships, Multi role users, dashboard, reports)
