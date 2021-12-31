@@ -8,7 +8,10 @@ class User < ApplicationRecord
   has_many :inventories, dependent: :destroy
   has_many :items, through: :inventories
   has_many :locations, dependent: :destroy
-  has_many :infections, dependent: :destroy, foreign_key: :reported_id
+
+  has_many :reporters, class_name: 'Infection', dependent: :destroy, foreign_key: :reporter_id
+  has_many :reports, class_name: 'Infection', dependent: :destroy, foreign_key: :reported_id
+
   has_one_attached :photo
 
   accepts_nested_attributes_for :inventories

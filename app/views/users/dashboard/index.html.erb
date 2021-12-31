@@ -1,5 +1,6 @@
 <% if current_user.admin? %>
     <%= render 'admin_dashboard' %>       
 <% elsif current_user.survivor? %>
+    <h1><% current_user.role %></h1>
     <%= render 'survivor_dashboard' %>       
 <% end %>

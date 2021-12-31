@@ -29,4 +29,7 @@
 
 <br>
 
-<%= link_to 'Change Location', new_location_path %>
+<% if !current_user.infected %>
+  <%= link_to 'Change Location', new_location_path %>
+<% end %>
+

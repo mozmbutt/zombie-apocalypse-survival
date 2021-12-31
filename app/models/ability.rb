@@ -8,7 +8,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.admin?
       can :manage, Item
-    else
+    elsif user.survivor?
       can :read, :create, Infection
       can :manage, Location
       can :read, Inventory

@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 2021_12_31_102005) do
   end
 
   create_table "infections", force: :cascade do |t|
-    t.integer "repoter_id"
+    t.integer "reporter_id"
     t.integer "reported_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reported_id"], name: "index_infections_on_reported_id"
-    t.index ["repoter_id"], name: "index_infections_on_repoter_id"
+    t.index ["reporter_id"], name: "index_infections_on_reporter_id"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -97,6 +97,6 @@ ActiveRecord::Schema.define(version: 2021_12_31_102005) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "infections", "users", column: "reported_id"
-  add_foreign_key "infections", "users", column: "repoter_id"
+  add_foreign_key "infections", "users", column: "reporter_id"
   add_foreign_key "locations", "users"
 end

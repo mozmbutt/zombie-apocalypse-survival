@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :users do
-    get 'dashboard/index'
+    get '/dashboard/index'
+    get '/survivors/index'
+    resources :infections, only: %i[new create]
   end
 
   resources :items
