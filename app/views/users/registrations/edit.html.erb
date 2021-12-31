@@ -46,10 +46,13 @@
     <%= f.password_field :current_password, autocomplete: "current-password"
   </div> %>
 
+
+<% if !current_user.infected %>
   <div class="field">
     <%= f.label :photo %>
     <%= f.file_field :photo%>
   </div>
+<% end %>
 
   <%= show_image_if_present(resource) %>
 

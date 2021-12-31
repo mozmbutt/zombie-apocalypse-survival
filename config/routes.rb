@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :items
-  resources :locations
+  resources :locations, only: %i[show new create index]
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

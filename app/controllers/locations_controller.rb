@@ -3,6 +3,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :update_previous_location, only: %i[create]
+  before_action :check_infection, only: %i[new create]
 
   # GET /locations or /locations.json
   def index
@@ -50,6 +51,12 @@ class LocationsController < ApplicationController
 
   def update_previous_location
     current_user.locations.last.update(current: 'false')
+  end
+
+  def check_infection
+    if current_user.infected
+      redirect_to locations_path
+    end
   end
 
   # DELETE /locations/1 or /locations/1.json

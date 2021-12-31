@@ -2,4 +2,30 @@
     <%= current_user.role %>
     <%= current_user.id %>
     <%= current_user.name %>
+    Reported: <%= @reports %> Time
+    Infected: <%= current_user.infected %>
 </pre>
+
+<h1>
+    My Inventory
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Points</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventories.each do |inventory| %>
+      <tr>
+        <td><%= inventory.item.name %></td>
+        <td><%= inventory.item.points %></td>
+        <td><%= inventory.stock %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
