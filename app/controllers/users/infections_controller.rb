@@ -24,7 +24,7 @@ class Users::InfectionsController < ApplicationController
       @user = User.find(@infection.reported_id)
       @report_count = Infection.where(reported_id: @user.id).count
       @user.update(infected: true) if @report_count >= 5
-      redirect_to users_survivors_index_path
+      redirect_to users_survivors_index_path, notice: 'Thank you for reporting survivor !'
     end
   end
 

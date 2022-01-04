@@ -9,7 +9,7 @@
 
   <div class="field">
     <%= f.label :age %>
-    <%= f.number_field :age, autofocus: true, autocomplete: "age" %>
+    <%= f.number_field :age, autofocus: true, autocomplete: "age", :min => 10, :max => 100 %>
   </div>
   
   <div class="field">

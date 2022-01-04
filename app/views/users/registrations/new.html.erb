@@ -15,7 +15,9 @@
 
   <div class="field">
     <%= f.label :age %>
-    <%= f.number_field :age, autofocus: true, autocomplete: "age" %>
+    <em>(only for 13+)</em>
+    <br>
+    <%= f.number_field :age, autofocus: true, autocomplete: "age", :min => 13, :max => 100  %>
   </div>
   
   <div class="field">
@@ -54,12 +56,12 @@
   <%= f.fields_for :locations, resource.locations.build do |lf| %>
     <div class="field">
         <%= lf.label :lat %>
-        <%= lf.number_field :lat, step: :any %>
+        <%= lf.number_field :lat, step: :any, value:''%>
     </div>
     
     <div class="field">
         <%= lf.label :lat %>
-        <%= lf.number_field :lng, step: :any %>
+        <%= lf.number_field :lng, step: :any, value:'' %>
     </div>
   <% end %>
 

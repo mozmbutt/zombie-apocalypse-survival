@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :trades do
+    resources :trade_histories
+  end
+  
   namespace :users do
     get '/dashboard/index'
     get '/survivors/index'

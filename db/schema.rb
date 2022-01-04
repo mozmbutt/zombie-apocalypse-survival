@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_31_102005) do
+ActiveRecord::Schema.define(version: 2022_01_03_115004) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,28 @@ ActiveRecord::Schema.define(version: 2021_12_31_102005) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
+  create_table "trade_histories", force: :cascade do |t|
+    t.integer "trade_id"
+    t.integer "item_id"
+    t.integer "user_id"
+    t.integer "quantity", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_trade_histories_on_item_id"
+    t.index ["trade_id"], name: "index_trade_histories_on_trade_id"
+    t.index ["user_id"], name: "index_trade_histories_on_user_id"
+  end
+
+  create_table "trades", force: :cascade do |t|
+    t.integer "base_trader_id"
+    t.integer "trader_id"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["base_trader_id"], name: "index_trades_on_base_trader_id"
+    t.index ["trader_id"], name: "index_trades_on_trader_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "age", null: false
@@ -99,4 +121,6 @@ ActiveRecord::Schema.define(version: 2021_12_31_102005) do
   add_foreign_key "infections", "users", column: "reported_id"
   add_foreign_key "infections", "users", column: "reporter_id"
   add_foreign_key "locations", "users"
+  add_foreign_key "trades", "users", column: "base_trader_id"
+  add_foreign_key "trades", "users", column: "trader_id"
 end

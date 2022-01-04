@@ -30,7 +30,11 @@
           </li>
 
           <li class="nav-item">
-            <%= link_to 'My Location', locations_path(current_user.locations.last.id), class:"nav-link" %>
+            <%= link_to 'My Location', locations_path, class:"nav-link" %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'My Trades', trades_path, class:"nav-link" %>
           </li>
 
         <% end %>
