@@ -23,4 +23,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :inventories
   accepts_nested_attributes_for :locations
+
+  scope :survivors_count, -> { where(:role => 'survivor').count}
+  scope :infected_survivors_count, -> { where(:role => 'survivor').where(:infected => true).count }
+  scope :non_infected_survivors_count, -> { where(:role => 'survivor').where(:infected => false).count }
 end

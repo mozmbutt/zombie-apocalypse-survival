@@ -23,7 +23,7 @@
   <% @base_trader_inventories.each do |inventory| %>
     <%= form.fields_for :trade_histories, trade.trade_histories.build do |th_fields| %>
       <%= inventory.item.name %> ( <%= inventory.item.points %> points ) 
-      <%= th_fields.number_field :quantity, :max => inventory.stock  %>
+      <%= th_fields.number_field :quantity, :min => 0, :max => inventory.stock  %>
       You have <%= inventory.stock %> in stock 
       <%= th_fields.hidden_field :item_id, value:inventory.item.id %>
       <%= th_fields.hidden_field :user_id, value:current_user.id %>
@@ -43,7 +43,7 @@
   <% @trader_inventories.each do |inventory| %>
     <%= form.fields_for :trade_histories, trade.trade_histories.build do |th_fields| %>
       <%= inventory.item.name %> ( <%= inventory.item.points %> points ) 
-      <%= th_fields.number_field :quantity, :max => inventory.stock  %>
+      <%= th_fields.number_field :quantity, :min => 0, :max => inventory.stock  %>
       They have <%= inventory.stock %> in stock 
       <%= th_fields.hidden_field :item_id, value:inventory.item.id %>
       <%= th_fields.hidden_field :user_id, value:@trader.id %>

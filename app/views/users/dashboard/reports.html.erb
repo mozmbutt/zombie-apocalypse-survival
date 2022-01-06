@@ -1,0 +1,23 @@
+infected survivors : <%= @infected%>%
+<br>
+non-infected survivors : <%= @non_infected%>%
+<br>
+point lost due to infection: <%= @infection_point_lost%> points
+<h1> items report </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Avg item stock</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items_average_report.each do |item| %>
+      <tr>
+        <td><%= item.to_a[0][1] %> Avg stock of <%= item.to_a[0][0] %> held by per survivor</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

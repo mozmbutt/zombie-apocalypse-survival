@@ -110,11 +110,11 @@ class TradesController < ApplicationController
     load_trader_items
     base_trader_points = calculate_trade_points(@base_trader_items)
     trader_points = calculate_trade_points(@trader_items)
-
+    byebug
     if (base_trader_points == 0) || (trader_points == 0) || (trader_points != base_trader_points)
       redirect_to new_trade_url(base_trader_id: params[:trade][:base_trader_id].to_i,
                                 trader_id: params[:trade][:trader_id].to_i),
-                  alert: 'Trading Items cost different points'
+                  alert: 'Please check you trading items points (should be equal and more than 0)'
     end
   end
 
@@ -123,6 +123,7 @@ class TradesController < ApplicationController
     trader_items.each do |item|
       trader_points += Item.find(item[:item_id])[:points].to_i * item[:quantity].to_i
     end
+    return trader_points
   end
 
   def load_trader_items

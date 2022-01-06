@@ -1,9 +1,8 @@
 <h1>Survivors</h1>
 <%= search_form_for @q, class:"form-inline my-2 my-lg-0", url: users_survivors_index_path do |f| %>
-        <%= f.search_field :name_or_email_or_age_or_gender_or_inventories_item_name_or_inventories_stock_matches_all, class:"form-control mr-sm-2", placeholder:'Search' %>
-
-        <%= f.submit 'Search', class:"btn btn-outline-success my-2 my-sm-0" %>
-      <% end %>
+  <%= f.search_field :name_or_email_or_age_or_gender_or_inventories_item_name_or_inventories_stock_matches_all, class:"form-control mr-sm-2", placeholder:'Search' %>
+  <%= f.submit 'Search', class:"btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
 <table>
   <thead>
     <tr>
