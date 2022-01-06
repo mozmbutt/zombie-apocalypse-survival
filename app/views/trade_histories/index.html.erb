@@ -1,48 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">Trade History</h1>
+</div>
 
-<h1>Trade History</h1>
-<hr>
-<h1>My Items</h1>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">My Items</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Quantity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="px-4 py-5 text-center">
+  <div class="col-lg-9 mx-auto">
+    <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @base_trade_histories.each do |trade_history| %>
-      <tr>
-        <td><%= trade_history.item.name %></td>
-        <td><%= trade_history.quantity %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @base_trade_histories.each do |trade_history| %>
+            <tr>
+              <td><%= trade_history.item.name %></td>
+              <td><%= trade_history.quantity %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<br>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">Trader's Items</h1>
+</div>
 
-<hr>
-<h1>Trader's Items</h1>
+<div class="px-4 py-5 text-center">
+  <div class="col-lg-9 mx-auto">
+    <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Quantity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @trade_histories.each do |trade_history| %>
-      <tr>
-        <td><%= trade_history.item.name %></td>
-        <td><%= trade_history.quantity %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @trade_histories.each do |trade_history| %>
+            <tr>
+              <td><%= trade_history.item.name %></td>
+              <td><%= trade_history.quantity %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

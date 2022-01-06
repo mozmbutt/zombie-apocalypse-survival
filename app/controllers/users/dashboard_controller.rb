@@ -9,6 +9,7 @@ class Users::DashboardController < ApplicationController
     @infected, @non_infected = infection_percent
     read_items_average_report
     @infection_point_lost = User.where(infected: true).includes(:inventories).sum(:stock)
+    @total_survivors = User.where(role: 'survivor').count
   end
 
   private

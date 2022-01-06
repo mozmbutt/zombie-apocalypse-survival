@@ -1,57 +1,71 @@
-<h1>Trades</h1>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">My Trades</h1>
+</div>
+
+<div class="px-4 py-5 text-center">
+  <div class="col-lg-9 mx-auto">
+    <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Base Trader</th>
+            <th>Trader</th>
+            <th>Status</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @base_trades.each do |trade| %>
+            <tr>
+              <td><%= trade.base_trader.name %></td>
+              <td><%= trade.trader.name %></td>
+              <td><%= trade.status %></td>
+              <td><%= link_to 'Show History', trade_trade_histories_path(trade), class:"btn btn-info" %></td>
+              <% if trade.status == 'pending'%>
+              <td><%= link_to 'Cancel Trade', trade_path(:id => trade.id, :status => 'canceled'), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <hr>
-<h2>My Trades</h2>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">Recieved Trades</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Base Trader</th>
-      <th>Trader</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="px-4 py-5 text-center">
+  <div class="col-lg-9 mx-auto">
+    <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Initiate By</th>
+            <th>Trader</th>
+            <th>Status</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @base_trades.each do |trade| %>
-      <tr>
-        <td><%= trade.base_trader.name %></td>
-        <td><%= trade.trader.name %></td>
-        <td><%= trade.status %></td>
-        <td><%= link_to 'Show History', trade_trade_histories_path(trade) %></td>
-        <% if trade.status == 'pending'%>
-         <td><%= link_to 'Cancel Trade', trade_path(:id => trade.id, :status => 'canceled'), method: :put, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<hr>
-<h2>Offered Trades</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Base Trader</th>
-      <th>Trader</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @trades.each do |trade| %>
-      <tr>
-        <td><%= trade.base_trader.name %></td>
-        <td><%= trade.trader.name %></td>
-        <td><%= trade.status %></td>
-        <td><%= link_to 'Show History', trade_trade_histories_path(trade) %></td>
-        <% if trade.status == 'pending'%>
-         <td><%= link_to 'Reject Trade', trade_path(:id => trade.id, :status => 'rejected'), method: :put, data: { confirm: 'Are you sure?' } %></td>
-         <td><%= link_to 'Accept Trade', trade_path(:id => trade.id, :status => 'accepted'), method: :put, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @trades.each do |trade| %>
+            <tr>
+              <td><%= trade.base_trader.name %></td>
+              <td><%= trade.trader.name %></td>
+              <td><%= trade.status %></td>
+              <td><%= link_to 'Show History', trade_trade_histories_path(trade) %></td>
+              <% if trade.status == 'pending'%>
+              <td><%= link_to 'Reject Trade', trade_path(:id => trade.id, :status => 'rejected'), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-warning" %></td>
+              <td><%= link_to 'Accept Trade', trade_path(:id => trade.id, :status => 'accepted'), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-success" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,35 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">Location</h1>
+</div>
 
-<h1>Locations</h1>
+<div class="px-4 py-5 text-center">
+  <div class="col-lg-9 mx-auto">
+    <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Lat</th>
+            <th>Lng</th>
+            <th>Current</th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Lat</th>
-      <th>Lng</th>
-      <th>Current</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @locations.each do |location| %>
-      <tr>
-        <td><%= location.user_id %></td>
-        <td><%= location.lat %></td>
-        <td><%= location.lng %></td>
-        <td><%= location.current %></td>
-        <%# <td><%= link_to 'Show', location </td>
-        <td><%= link_to 'Edit', edit_location_path(location) </td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } </td> %>
-      </tr>
+        <tbody>
+          <% @locations.each do |location| %>
+            <tr>
+              <td><%= location.lat %></td>
+              <td><%= location.lng %></td>
+              <td><%= location.current %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% if !current_user.infected %>
+      <%= link_to 'Change Location', new_location_path, class:"btn btn-info" %>
     <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<% if !current_user.infected %>
-  <%= link_to 'Change Location', new_location_path %>
-<% end %>
-
+  </div>
+</div>

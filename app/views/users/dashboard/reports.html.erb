@@ -1,23 +1,37 @@
-infected survivors : <%= @infected%>%
-<br>
-non-infected survivors : <%= @non_infected%>%
-<br>
-point lost due to infection: <%= @infection_point_lost%> points
-<h1> items report </h1>
+<div class="container">
+    <div class="row">
+    <div class="col-md-3">
+      <div class="card-counter danger">
+        <i class="fa fa-code-fork"></i>
+        <span class="count-numbers"><%= @infected%>%</span>
+        <span class="count-name">Infected Survivors</span>
+      </div>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Avg item stock</th>
-    </tr>
-  </thead>
+    <div class="col-md-3">
+      <div class="card-counter primary">
+        <i class="fa fa-ticket"></i>
+        <span class="count-numbers"><%= @non_infected%>%</span>
+        <span class="count-name">Non-infected Survivors</span>
+      </div>
+    </div>
 
-  <tbody>
-    <% @items_average_report.each do |item| %>
-      <tr>
-        <td><%= item.to_a[0][1] %> Avg stock of <%= item.to_a[0][0] %> held by per survivor</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="col-md-3">
+      <div class="card-counter success">
+        <i class="fa fa-database"></i>
+        <span class="count-numbers"><%= @infection_point_lost%></span>
+        <span class="count-name">Point Lost</span>
+      </div>
+    </div>
 
+    <div class="col-md-3">
+      <div class="card-counter info">
+        <i class="fa fa-users"></i>
+        <span class="count-numbers"><%= @total_survivors %></span>
+        <span class="count-name">Survivors</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'items_report' %>
