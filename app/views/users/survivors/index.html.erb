@@ -1,12 +1,17 @@
 <h1>Survivors</h1>
+<%= search_form_for @q, class:"form-inline my-2 my-lg-0", url: users_survivors_index_path do |f| %>
+        <%= f.search_field :name_or_email_or_age_or_gender_or_inventories_item_name_or_inventories_stock_matches_all, class:"form-control mr-sm-2", placeholder:'Search' %>
 
+        <%= f.submit 'Search', class:"btn btn-outline-success my-2 my-sm-0" %>
+      <% end %>
 <table>
   <thead>
     <tr>
-      <th>ID #</th>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Gender</th>
+      <th><%= sort_link(@q, :id) %></th>
+      <th><%= sort_link(@q, :name) %></th>
+      <th><%= sort_link(@q, :age) %></th>
+      <th><%= sort_link(@q, :gender) %></th>
+      <th>Inventory</th>
       <th>Infected</th>
       <th>Report</th>
       <th>Trade</th>
@@ -16,10 +21,17 @@
   <tbody>
     <% @survivors.each do |survivor| %>
       <tr>
-        <td><%= survivor.id %></td>
+        <td>player_id_<%= survivor.id %></td>
         <td><%= survivor.name %></td>
         <td><%= survivor.age %></td>
         <td><%= survivor.gender %></td>
+        <td>
+          <% survivor.inventories.each do |inventory| %>
+            <p>
+              <%= inventory.item.name %> (<%= inventory.stock %>)
+            </p>
+          <% end %>
+        </td>
         <td><%= survivor.infected %></td>
         <td>
         <% if can_report(survivor.id) %>
