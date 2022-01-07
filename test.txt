@@ -1,0 +1,24 @@
+User [  roles (S, A) , 
+        bool(infec_status) ,  
+    ]
+    has_one :inventory
+    has_many :items, through: :inventory
+    has_many: locations
+    has_many : trades
+    has_many : infection
+
+Location
+    belongs_to :user
+
+Inventory
+    belongs_to :user
+
+infection_records
+    reporter (User)
+    reported (User)
+
+Item
+
+Trade (json type column for traded items)
+    belongs_to :requester (User)
+    belongs_to :reciever  (User)

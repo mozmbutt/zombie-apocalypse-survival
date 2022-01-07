@@ -1,0 +1,46 @@
+<h1>Survivors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID #</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Infected</th>
+      <th>Report</th>
+      <th>Trade</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @survivors.each do |survivor| %>
+      <tr>
+        <td><%= survivor.id %></td>
+        <td><%= survivor.name %></td>
+        <td><%= survivor.age %></td>
+        <td><%= survivor.gender %></td>
+        <td><%= survivor.infected %></td>
+        <td>
+        <% if can_report(survivor.id) %>
+            <%= form_for(survivor.reports.build, :url => users_infections_path) do |form| %>
+                <%= form.hidden_field :reporter_id, value: current_user.id %> 
+                <%= form.hidden_field :reported_id %> 
+                <%= form.submit 'Report Infected' %>
+            <% end %>
+        <% else %>
+            Report Disabled
+        <% end %>
+        </td>
+        
+        <td>
+            <% if survivor.infected || current_user.infected %>
+                Cant Trade
+            <% else %>
+              <%= link_to 'Trade', new_trade_path(:base_trader_id => current_user.id, :trader_id => survivor.id) %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
