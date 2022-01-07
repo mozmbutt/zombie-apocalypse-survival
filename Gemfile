@@ -21,6 +21,13 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# gem for searching
+gem 'ransack'
+# Use Devise as authentication
+gem 'devise'
+
+# allows to define the rules to access different objects
+gem 'cancancan'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

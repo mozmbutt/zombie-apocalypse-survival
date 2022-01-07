@@ -1,0 +1,25 @@
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">Items Report</h1>
+</div>
+
+<div class="px-4 py-5 text-center">
+  <div class="col-lg-9 mx-auto">
+    <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                <th>Avg item stock</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @items_average_report.each do |item| %>
+                <tr>
+                    <td><%= item.to_a[0][1] %> Avg stock of <%= item.to_a[0][0] %> held by per survivor</td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container emp-profile">
+  <div class="row">
+      <div class="col-md-4">
+          <div class="profile-img">
+              <%= show_image_if_present(current_user) %>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="profile-head">
+              <h5>
+                  <%= current_user.name %>
+              </h5>
+              <h6>
+                  role: <%= current_user.role %>
+              </h6>
+              <p class="proile-rating">INFECTED : <span><%= current_user.infected %></span></p>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                      <a class="nav-link active" id="home-tab">About</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="col-md-2">
+          <%= link_to 'Edit Profile', edit_user_registration_path, class:"profile-edit-btn" %>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+          <div class="profile-work">
+              <p>NAVIGATE TO</p>
+              <%= link_to 'Survivors', users_survivors_index_path %><br/>
+              <%= link_to 'Edit Profile', edit_user_registration_path %><br/>
+              <%= link_to 'My Location', locations_path %><br/>
+              <%= link_to 'My Trades', trades_path %>
+          </div>
+      </div>
+      <div class="col-md-8">
+          <div class="tab-content profile-tab" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <%= render 'user_info' %>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Reported</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p><%= @reports %> time</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>My Inventory</h1>
+                    </div>
+                </div>
+                <hr>
+                <% @inventories.each do |inventory| %>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <label><%= inventory.item.name %></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p><%= inventory.stock %> in stock</p>
+                    </div>
+                  </div>
+                <% end %>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
