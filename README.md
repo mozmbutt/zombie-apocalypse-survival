@@ -6,6 +6,6 @@
 
 * Configuration: run $ bundle install
 
-* Database: sqlite3
+* Database: postgresql
 
 * Services (User Autherization, Relationships, Multi role users, dashboard, reports)
