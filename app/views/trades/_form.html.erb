@@ -1,0 +1,57 @@
+<%= form_with(model: trade) do |form| %>
+  <% if trade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trade.errors.count, "error") %> prohibited this trade from being saved:</h2>
+
+      <ul>
+        <% trade.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :base_trader_id, value:current_user.id %>
+  <%= form.hidden_field :trader_id, value:@trader.id %>
+
+  <h3>
+    Select your Inventory
+  </h3>
+
+  <hr>
+
+  <% @base_trader_inventories.each do |inventory| %>
+    <%= form.fields_for :trade_histories, trade.trade_histories.build do |th_fields| %>
+      <%= inventory.item.name %> ( <%= inventory.item.points %> points ) 
+      <%= th_fields.number_field :quantity, :min => 0, :max => inventory.stock  %>
+      You have <%= inventory.stock %> in stock 
+      <%= th_fields.hidden_field :item_id, value:inventory.item.id %>
+      <%= th_fields.hidden_field :user_id, value:current_user.id %>
+      <br>
+    <% end %>    
+  <% end %>
+
+<br>
+<br>
+
+<h3>
+    Select <%= @trader.name %>'s Inventory
+  </h3>
+
+  <hr>
+
+  <% @trader_inventories.each do |inventory| %>
+    <%= form.fields_for :trade_histories, trade.trade_histories.build do |th_fields| %>
+      <%= inventory.item.name %> ( <%= inventory.item.points %> points ) 
+      <%= th_fields.number_field :quantity, :min => 0, :max => inventory.stock  %>
+      They have <%= inventory.stock %> in stock 
+      <%= th_fields.hidden_field :item_id, value:inventory.item.id %>
+      <%= th_fields.hidden_field :user_id, value:@trader.id %>
+      <br>
+    <% end %>    
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
