@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Trade History</h1>
+<hr>
+<h1>My Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @base_trade_histories.each do |trade_history| %>
+      <tr>
+        <td><%= trade_history.item.name %></td>
+        <td><%= trade_history.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<hr>
+<h1>Trader's Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trade_histories.each do |trade_history| %>
+      <tr>
+        <td><%= trade_history.item.name %></td>
+        <td><%= trade_history.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
