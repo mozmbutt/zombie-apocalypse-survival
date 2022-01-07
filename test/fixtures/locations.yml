@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  lat: 9.99
+  lng: 9.99
+  current: false
+
+two:
+  user: two
+  lat: 9.99
+  lng: 9.99
+  current: false
