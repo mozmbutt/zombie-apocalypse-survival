@@ -2,7 +2,6 @@ class TradeHistoriesController < ApplicationController
   before_action :set_trade_history, only: %i[show edit update destroy]
   before_action :authenticate_user!
   
-  # GET /trade_histories or /trade_histories.json
   def index
     trade_history = TradeHistory.where(trade_id: params[:trade_id])
     @base_trade_histories = trade_history.offered_items(current_user) 

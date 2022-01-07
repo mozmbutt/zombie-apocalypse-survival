@@ -4,17 +4,15 @@ class LocationsController < ApplicationController
   before_action :update_previous_location, only: [:create]
   before_action :check_infection, only: %i[new create]
 
-  # GET /locations or /locations.json
+  # show signed in survivor locations track back
   def index
     @locations = current_user.locations
   end
 
-  # GET /locations/new
   def new
     @location = Location.new(user_id: current_user.id)
   end
 
-  # POST /locations or /locations.json
   def create
     @location = Location.new(location_params)
 
@@ -29,20 +27,17 @@ class LocationsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_location
-    @location = Location.find(params[:id])
-  end
-
   # Only allow a list of trusted parameters through.
   def location_params
     params.require(:location).permit(:user_id, :lat, :lng, :current)
   end
 
+  # update survivors previous location to false
   def update_previous_location
     current_user.locations.last.update(current: 'false')
   end
 
+  # infected survivor can not change his location
   def check_infection
     if current_user.infected
       redirect_to locations_path, alert: 'You are infected !'

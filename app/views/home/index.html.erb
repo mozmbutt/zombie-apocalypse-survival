@@ -1,15 +1,15 @@
 <div class="jumbotron" style="background-image:url('<%= image_path('home-cover.jpg') %>')">
-    <div class="photo-overlay">
-        <div class="container">
-            <h1 class="display-3">Zombie Apocalypse Survival</h1>
-            <% if !user_signed_in? %>
-                <p>
-                    <%= link_to 'Log In', new_user_session_path, class:"btn btn-info btn-lg" %>
-                    <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-warning btn-lg" %>
-                </p>
-            <% else %>
-                <%= link_to 'Dashboard', users_dashboard_index_path, class:"btn btn-danger btn-lg" %>
-            <% end %>
-        </div>
-    </div>
+	<div class="photo-overlay">
+		<div class="container">
+			<h1 class="display-3">Zombie Apocalypse Survival</h1>
+				<% if !user_signed_in? %>
+					<p>
+							<%= link_to 'Log In', new_user_session_path, class:"btn btn-info btn-lg" %>
+							<%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-warning btn-lg" %>
+					</p>
+				<% else %>
+					<%= link_to 'Dashboard', users_dashboard_index_path, class:"btn btn-danger btn-lg" %>
+				<% end %>
+		</div>
+	</div>
 </div>

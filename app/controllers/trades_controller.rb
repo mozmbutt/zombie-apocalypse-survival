@@ -5,13 +5,11 @@ class TradesController < ApplicationController
   before_action :set_trade, only: [:update]
   before_action :confirm_trade, only: [:create]
 
-  # GET /trades or /trades.json
   def index
     @base_trades = Trade.where(base_trader_id: current_user.id)
     @trades = Trade.where(trader_id: current_user.id)
   end
 
-  # GET /trades/new
   def new
     @base_trader_inventories = Inventory.where(user_id: params[:base_trader_id])
     @trader_inventories = Inventory.where(user_id: params[:trader_id])
@@ -19,7 +17,6 @@ class TradesController < ApplicationController
     @trade = Trade.new
   end
 
-  # POST /trades or /trades.json
   def create
     @trade = Trade.create(trade_params)
     if @trade.save!
@@ -29,7 +26,6 @@ class TradesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /trades/1 or /trades/1.json
   def update
     status = params[:status]
     trading_transection if status == 'accepted'

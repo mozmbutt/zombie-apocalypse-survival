@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # show image of user or placeholder image instead
   def show_image_if_present(resource)
     if resource.photo.record.photo.present?
       img = resource.photo

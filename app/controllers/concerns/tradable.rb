@@ -1,7 +1,9 @@
-#./app/controllers/concerns/tradable.rb
+# ./app/controllers/concerns/tradable.rb
+# This module have all logic related to trading between survivors
 module Tradable
   extend ActiveSupport::Concern
   
+  # Trading transection to exchange inventory stock between surviviors
   def trading_transection
     @trade = Trade.find(params[:id])
     load_history
@@ -15,6 +17,7 @@ module Tradable
     end
   end
 
+  # Detuct stock from survivor's inventory
   def debit_stock(histories, inventories)
     histories.each do |t_history|
       inventory_item = inventories.find_by(item_id: t_history[:item_id])
@@ -23,6 +26,7 @@ module Tradable
     end
   end
 
+  # Add stock to survivor's inventory
   def credit_stock(histories, inventories)
     histories.each do |t_history|
       inventory_item = inventories.find_by(item_id: t_history[:item_id])
@@ -41,6 +45,7 @@ module Tradable
     @trader_inventories = Inventory.where(user_id: @trade[:trader_id])
   end
 
+  # call function to make sure both sides of trade has equal points
   def confirm_trade
     load_trader_items
     base_trader_points = calculate_trade_points(@base_trader_items)
