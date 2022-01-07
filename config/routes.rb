@@ -3,16 +3,16 @@ Rails.application.routes.draw do
     get '/dashboard/index'
     get '/dashboard/reports'
     get '/survivors/index'
-    resources :infections, only: %i[new create]
+    resources :infections, only: [:create]
   end
 
   resources :items
 
-  resources :trades do
-    resources :trade_histories
+  resources :trades, only: [:index, :new, :create, :update] do
+    resources :trade_histories,only: [:index]
   end
 
-  resources :locations, only: %i[show new create index]
+  resources :locations, only: [:new, :create, :index]
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

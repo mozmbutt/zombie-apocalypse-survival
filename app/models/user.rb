@@ -27,4 +27,8 @@ class User < ApplicationRecord
   scope :survivors_count, -> { where(:role => 'survivor').count}
   scope :infected_survivors_count, -> { where(:role => 'survivor').where(:infected => true).count }
   scope :non_infected_survivors_count, -> { where(:role => 'survivor').where(:infected => false).count }
+  scope :role_survivor, -> { where(:role => 'survivor') }
+  scope :role_admin, -> { where(:role => 'admin') }
+  scope :except_survivor, ->(current_user) { where.not(id: current_user.id) }
+
 end

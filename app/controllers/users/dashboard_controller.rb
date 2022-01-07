@@ -1,7 +1,7 @@
 class Users::DashboardController < ApplicationController
   before_action :check_role, only: [:reports]
   def index
-    @inventories = Inventory.my_inventory(current_user)
+    @inventories = current_user.inventories #.my_inventory(current_user)
     @reports = current_user.reports.count
   end
 
@@ -9,7 +9,7 @@ class Users::DashboardController < ApplicationController
     @infected, @non_infected = infection_percent
     read_items_average_report
     @infection_point_lost = User.where(infected: true).includes(:inventories).sum(:stock)
-    @total_survivors = User.where(role: 'survivor').count
+    @total_survivors = User.survivors_count
   end
 
   private

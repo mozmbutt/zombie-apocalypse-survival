@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(_resource)
     users_dashboard_index_path
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to users_dashboard_index_path, :alert => 'ouch! Its seems like you have no rights!'
+  end
 end

@@ -16,9 +16,9 @@
   </head>
 
   <body>
-    <%= render 'layouts/nav/public' %>
     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <p class="alert-msg"><%= alert %></p>
+    <%= render 'layouts/nav/public' %>
     <main role="main" class="main-body">
       <%= yield %>
     </main>
