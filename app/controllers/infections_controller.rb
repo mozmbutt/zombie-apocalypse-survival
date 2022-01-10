@@ -1,25 +1,20 @@
 class InfectionsController < ApplicationController
   before_action :set_infection, only: %i[ show edit update destroy ]
 
-  # GET /infections or /infections.json
   def index
     @infections = Infection.all
   end
 
-  # GET /infections/1 or /infections/1.json
   def show
   end
 
-  # GET /infections/new
   def new
     @infection = Infection.new
   end
 
-  # GET /infections/1/edit
   def edit
   end
 
-  # POST /infections or /infections.json
   def create
     @infection = Infection.new(infection_params)
 
@@ -34,7 +29,6 @@ class InfectionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /infections/1 or /infections/1.json
   def update
     respond_to do |format|
       if @infection.update(infection_params)
@@ -47,7 +41,6 @@ class InfectionsController < ApplicationController
     end
   end
 
-  # DELETE /infections/1 or /infections/1.json
   def destroy
     @infection.destroy
 
