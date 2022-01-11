@@ -13,6 +13,8 @@ development:
   password: admin
   pool: 5
   timeout: 5000
+  host: localhost
+  
 test:
   adapter: postgresql
   database: zombie_apocalypse_survival_test

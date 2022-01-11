@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :users do
     get '/dashboard/index'
@@ -8,11 +10,11 @@ Rails.application.routes.draw do
 
   resources :items
 
-  resources :trades, only: [:index, :new, :create, :update] do
-    resources :trade_histories,only: [:index]
+  resources :trades, only: %i[index new create update] do
+    resources :trade_histories, only: [:index]
   end
 
-  resources :locations, only: [:new, :create, :index]
+  resources :locations, only: %i[new create index]
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

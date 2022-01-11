@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TradesController < ApplicationController
   include Tradable
   load_and_authorize_resource

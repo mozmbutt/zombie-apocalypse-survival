@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
@@ -39,8 +41,6 @@ class LocationsController < ApplicationController
 
   # infected survivor can not change his location
   def check_infection
-    if current_user.infected
-      redirect_to locations_path, alert: 'You are infected !'
-    end
+    redirect_to locations_path, alert: 'You are infected !' if current_user.infected
   end
 end

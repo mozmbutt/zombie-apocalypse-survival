@@ -1,4 +1,6 @@
+# frozen_string_literal: true
+
 class Location < ApplicationRecord
-  validates_presence_of :lat, :lng
+  validates :lat, :lng, presence: true
   belongs_to :user
 end

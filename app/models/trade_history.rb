@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TradeHistory < ApplicationRecord
   belongs_to :trade
   belongs_to :item

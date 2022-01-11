@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
   load_and_authorize_resource
   before_action :set_item, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: [:new]
 
   def index
     @items = Item.all

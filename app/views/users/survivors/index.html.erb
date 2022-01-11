@@ -2,11 +2,10 @@
   <h1 class="display-4 fw-normal">Survivors</h1>
 </div>
 
-
 <div class="px-4 py-5 text-center">
   <div class="col-lg-9 mx-auto">
     <%= search_form_for @q, class:"form-inline my-2 mb-2", url: users_survivors_index_path do |f| %>
-      <%= f.search_field :name_or_email_or_age_or_gender_or_inventories_item_name_or_inventories_stock_matches_all, class:"form-control mr-sm-2", placeholder:'Search' %>
+      <%= f.search_field :name_or_inventories_item_name_or_inventories_stock_cont, class:"form-control mr-sm-2", placeholder:'Search' %>
       <%= f.submit 'Search', class:"btn btn-outline-success my-2 my-sm-0" %>
     <% end %>
     <div class="d-grid gap-2 d-lg-flex justify-content-sm-center">

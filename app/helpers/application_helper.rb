@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   # show image of user or placeholder image instead
   def show_image_if_present(resource)

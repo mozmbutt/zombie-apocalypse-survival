@@ -1,8 +1,10 @@
-class Trade < ApplicationRecord
-  enum status: %i[pending accepted rejected canceled]
+# frozen_string_literal: true
 
-  belongs_to :base_trader, class_name: 'User', foreign_key: 'base_trader_id'
-  belongs_to :trader, class_name: 'User', foreign_key: 'trader_id'
+class Trade < ApplicationRecord
+  enum status: { pending: 0, accepted: 1, rejected: 2, canceled: 3 }
+
+  belongs_to :base_trader, class_name: 'User'
+  belongs_to :trader, class_name: 'User'
 
   has_many :trade_histories, dependent: :destroy
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTradeHistories < ActiveRecord::Migration[6.1]
   def change
     create_table :trade_histories do |t|

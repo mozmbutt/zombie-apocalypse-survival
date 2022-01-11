@@ -1,6 +1,10 @@
-class Users::SurvivorsController < ApplicationController
-  def index
-    @q = User.ransack(params[:q])
-    @survivors = @q.result(distinct: true).role_survivor.except_survivor(current_user).joins(:inventories)
+# frozen_string_literal: true
+
+module Users
+  class SurvivorsController < ApplicationController
+    def index
+      @q = User.ransack(params[:q])
+      @survivors = @q.result(distinct: true).survivor.except_survivor(current_user).includes(:inventories)
+    end
   end
 end
