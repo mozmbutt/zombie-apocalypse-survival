@@ -8,10 +8,11 @@ class ApplicationController < ActionController::Base
   def configure_permitted_perameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :age, :gender, :email, :photo,
                                                        :password, :password_confirmation,
-                                                       { locations_attributes: {},
-                                                         inventories_attributes: {} }])
-    devise_parameter_sanitizer.permit(:update,
-                                      keys: %i[name age gender email photo password password_confirmation])
+                                                       { locations_attributes: %i[lat lng],
+                                                         inventories_attributes: %i[user_id item_id stock] }])
+
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name age gender email photo
+                                                                password password_confirmation current_password])
   end
 
   def after_sign_in_path_for(_resource)

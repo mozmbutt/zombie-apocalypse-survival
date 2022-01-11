@@ -45,8 +45,13 @@
                   </div>
 
                   <div class="field">
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password" , class:"form-control"%>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
                     <%= f.label :password_confirmation, class:"form-label mb-4" %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
+                    <%= f.label :current_password, class:"form-label mb-4" %> <i>(we need your current password to confirm your changes)</i><br />
                   </div>
 
                   <% if !current_user.infected %>
