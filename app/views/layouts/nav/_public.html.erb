@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="/">Zombie Apocalypse Survival</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item active">
+          <%= link_to 'DASHBOARD', users_dashboard_index_path, class:"nav-link" %>
+        </li>
+
+        <li>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-link" %>
+        </li>
+
+         <% if user_signed_in? && current_user.admin? %>
+
+          <li class="nav-item">
+                <%= link_to 'MANAGE ITEMS', items_path, class:"nav-link" %>
+          </li>
+        
+        <% end %>
+
+        <% if current_user.survivor? %>
+          
+          <li>
+            <%= link_to 'Profile', edit_user_registration_path%>
+          </li>
+
+          <li>
+            <%= link_to 'My Location', locations_path(current_user.locations.last.id)%>
+          </li>
+
+        <% end %>
+
+
+      <% else %>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li>
+          <%= link_to 'Log In', new_user_session_path, class:"nav-link" %>
+        </li>
+
+        <li>
+          <%= link_to 'Sign Up', new_user_registration_path, class:"nav-link" %>
+        </li>
+
+      <% end %>
+
+     
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">USER</a>
+      <ul class="dropdown-menu" aria-labelledby="dropdown06">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"dropdown-item" %>
+          </li>
+
+          <% if current_user.survivor? %>
+            
+            <li>
+              <%= link_to 'Profile', edit_user_registration_path, class:"dropdown-item" %>
+            </li>
+
+            <li>
+              <%= link_to 'My Location', locations_path(current_user.locations.last.id), class:"dropdown-item" %>
+            </li>
+
+          <% end %>
+
+        <% else %>
+          <li>
+            <%= link_to 'Log In', new_user_session_path, class:"dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to 'Sign Up', new_user_registration_path, class:"dropdown-item" %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+    
+   
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
