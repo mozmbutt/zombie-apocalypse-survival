@@ -38,10 +38,20 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :inventories
   accepts_nested_attributes_for :locations
 
-  scope :survivors_count, -> { where(role: 'survivor').count }
-  scope :infected_survivors_count, -> { where(role: 'survivor').where(infected: true).count }
-  scope :non_infected_survivors_count, -> { where(role: 'survivor').where(infected: false).count }
-  scope :role_survivor, -> { where(role: 'survivor') }
-  scope :role_admin, -> { where(role: 'admin') }
-  scope :except_survivor, ->(current_user) { where.not(id: current_user.id) }
+  scope :infected, ->(status) { where(infected: status) }
+  scope :except_survivor, ->(user) { where.not(id: user.id) }
+
+  def self.total_survivors
+    survivor.count
+  end
+
+  def self.infected_percentage
+    infected_survivors = survivor.infected(true).count
+    (infected_survivors * 100) / total_survivors
+  end
+
+  def self.non_infected_percentage
+    non_infected_survivors = survivor.infected(false).count
+    (non_infected_survivors * 100) / total_survivors
+  end
 end

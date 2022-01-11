@@ -2,9 +2,9 @@
 
 Rails.application.routes.draw do
   namespace :users do
-    get '/dashboard/index'
-    get '/dashboard/reports'
-    get '/survivors/index'
+    get '/dashboard/index',   to: 'dashboard#index'
+    get '/dashboard/reports', to: 'dashboard#reports'
+    get '/survivors/index',   to: 'survivors#index'
     resources :infections, only: [:create]
   end
 

@@ -5,48 +5,6 @@
 module Tradable
   extend ActiveSupport::Concern
 
-  # Trading transection to exchange inventory stock between surviviors
-  def trading_transection
-    @trade = Trade.find(params[:id])
-    load_history
-    load_inventory
-    Trade.transaction do
-      debit_stock(@base_trader_histories, @base_trader_inventories) # minus stock from base_trader
-      debit_stock(@trader_histories, @trader_inventories) # minus stock from trader
-
-      credit_stock(@base_trader_histories, @trader_inventories) # add stock to base_trader
-      credit_stock(@trader_histories, @base_trader_inventories) # add stock to trader
-    end
-  end
-
-  # Detuct stock from survivor's inventory
-  def debit_stock(histories, inventories)
-    histories.each do |t_history|
-      inventory_item = inventories.find_by(item_id: t_history[:item_id])
-      new_stock = inventory_item.stock - t_history[:quantity]
-      inventory_item.update(stock: new_stock)
-    end
-  end
-
-  # Add stock to survivor's inventory
-  def credit_stock(histories, inventories)
-    histories.each do |t_history|
-      inventory_item = inventories.find_by(item_id: t_history[:item_id])
-      new_stock = inventory_item.stock + t_history[:quantity]
-      inventory_item.update(stock: new_stock)
-    end
-  end
-
-  def load_history
-    @base_trader_histories = @trade.trade_histories.where(user_id: @trade[:base_trader_id])
-    @trader_histories = @trade.trade_histories.where(user_id: @trade[:trader_id])
-  end
-
-  def load_inventory
-    @base_trader_inventories = Inventory.where(user_id: @trade[:base_trader_id])
-    @trader_inventories = Inventory.where(user_id: @trade[:trader_id])
-  end
-
   # call function to make sure both sides of trade has equal points
   def confirm_trade
     load_trader_items

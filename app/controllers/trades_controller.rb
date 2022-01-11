@@ -30,7 +30,7 @@ class TradesController < ApplicationController
 
   def update
     status = params[:status]
-    trading_transection if status == 'accepted'
+    @trade.trading_transection if status == 'accepted'
     @trade.update(status: status)
     respond_to do |format|
       format.html { redirect_to trades_url, notice: "Trade is successfully #{status}." }
