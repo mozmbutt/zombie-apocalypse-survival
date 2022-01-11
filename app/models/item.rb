@@ -3,7 +3,7 @@
 class Item < ApplicationRecord
   validates :name, :points, presence: true
 
-  has_many :invetories, dependent: :nil
+  has_many :invetories, dependent: :destroy
   has_many :users, through: :inventories
-  has_many :trade_histories, dependent: :nil
+  has_many :trade_histories, dependent: :destroy
 end
