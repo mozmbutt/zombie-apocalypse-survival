@@ -2,8 +2,8 @@
 
 class TradesController < ApplicationController
   include Tradable
-  load_and_authorize_resource
   before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_trade, only: [:update]
   before_action :confirm_trade, only: [:create]
 
@@ -13,7 +13,7 @@ class TradesController < ApplicationController
   end
 
   def new
-    @base_trader_inventories = Inventory.where(user_id: params[:base_trader_id])
+    @base_trader_inventories = current_user.inventories
     @trader_inventories = Inventory.where(user_id: params[:trader_id])
     @trader = User.find(params[:trader_id])
     @trade = Trade.new

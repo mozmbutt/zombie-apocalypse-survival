@@ -54,7 +54,7 @@
                   <% if survivor.infected || current_user.infected %>
                       Cant Trade
                   <% else %>
-                    <%= link_to 'Trade', new_trade_path(:base_trader_id => current_user.id, :trader_id => survivor.id), class:"btn btn-info" %>
+                    <%= link_to 'Trade', new_trade_path(:trader_id => survivor.id), class:"btn btn-info" %>
                   <% end %>
               </td>
             </tr>

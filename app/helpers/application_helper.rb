@@ -5,9 +5,9 @@ module ApplicationHelper
   def show_image_if_present(resource)
     if resource.photo.record.photo.present?
       img = resource.photo
-      image_tag img, width: '200'
+      image_tag img
     else
-      image_tag image_path('no-image-found.jpg'), width: '200'
+      image_tag image_path('no-image-found.jpg')
     end
   end
 end

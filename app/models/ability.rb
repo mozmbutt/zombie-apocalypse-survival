@@ -9,11 +9,11 @@ class Ability
     if user.admin?
       can :manage, Item
     elsif user.survivor?
-      can :create, Infection
-      can :manage, Location
-      can :manage, Inventory
+      can :create, Infection, reporter_id: user.id
+      can :manage, Location, user_id: user.id
+      can :manage, Inventory, user_id: user.id
       can :manage, Trade
-      can :manage, TradeHistory
+      can :manage, TradeHistory, user_id: user.id
     end
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TradeHistoriesController < ApplicationController
-  # before_action :set_trade_history, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     trade_history = TradeHistory.where(trade_id: params[:trade_id])

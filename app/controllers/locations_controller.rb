@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!
-  before_action :update_previous_location, only: [:create]
+  load_and_authorize_resource
+  after_action :update_previous_location, only: [:create]
   before_action :check_infection, only: %i[new create]
 
   # show signed in survivor locations track back
@@ -12,15 +12,14 @@ class LocationsController < ApplicationController
   end
 
   def new
-    @location = Location.new(user_id: current_user.id)
+    @location = current_user.locations.new
   end
 
   def create
     @location = Location.new(location_params)
-
     respond_to do |format|
       if @location.save
-        format.html { redirect_to locations_path, notice: 'Location was successfully created.' }
+        format.html { redirect_to locations_path, notice: 'Location was successfully changed.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,7 +35,7 @@ class LocationsController < ApplicationController
 
   # update survivors previous location to false
   def update_previous_location
-    current_user.locations.last.update(current: 'false')
+    current_user.locations.last(2).first.update(current: 'false')
   end
 
   # infected survivor can not change his location

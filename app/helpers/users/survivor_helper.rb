@@ -4,8 +4,8 @@ module Users
   module SurvivorHelper
     # check if user didnt report already
     def can_report(reported_id)
-      check = Infection.where(reporter_id: current_user.id, reported_id: reported_id)
-      if check.blank? && !current_user.infected
+      already_reported = Infection.exists?(reporter_id: current_user.id, reported_id: reported_id)
+      if !already_reported && !current_user.infected
         true
       else
         false
@@ -13,3 +13,4 @@ module Users
     end
   end
 end
+c

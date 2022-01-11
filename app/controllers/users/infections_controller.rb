@@ -2,6 +2,8 @@
 
 module Users
   class InfectionsController < ApplicationController
+    before_action :authenticate_user!
+    load_and_authorize_resource
     after_action :check_or_mark_infected, only: [:create]
 
     # POST /infections or /infections.json

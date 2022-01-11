@@ -2,9 +2,11 @@
 
 module Users
   class DashboardController < ApplicationController
+    before_action :authenticate_user!
     before_action :check_role, only: [:reports]
+
     def index
-      @inventories = current_user.inventories # .my_inventory(current_user)
+      @inventories = current_user.inventories
       @reports = current_user.reports.count
     end
 
@@ -18,10 +20,10 @@ module Users
     private
 
     def check_role
-      return unless !current_user.admin?
-
-      redirect_to users_dashboard_index_path,
-                  alert: 'You are notauthenticated for view reports!'
+      unless current_user.admin?
+        redirect_to users_dashboard_index_path,
+                    alert: 'You are notauthenticated for view reports!'
+      end
     end
 
     def infection_percent
