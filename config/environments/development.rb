@@ -77,9 +77,9 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   Cloudinary.config do |config|
-    config.cloud_name = Rails.application.credentials.config[:development][:cloudinary][:cloud_name]
-    config.api_key = Rails.application.credentials.config[:development][:cloudinary] [:api_key]
-    config.api_secret = Rails.application.credentials.config[:development][:cloudinary][:api_secret]
+    config.cloud_name = Rails.application.credentials.config[:cloudinary][:development][:cloud_name]
+    config.api_key = Rails.application.credentials.config[:cloudinary][:development][:api_key]
+    config.api_secret = Rails.application.credentials.config[:cloudinary][:development][:api_secret]
     config.secure = true
     config.cdn_subdomain = true
   end
