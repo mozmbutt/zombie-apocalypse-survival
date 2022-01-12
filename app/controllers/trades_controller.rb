@@ -13,10 +13,14 @@ class TradesController < ApplicationController
   end
 
   def new
-    @base_trader_inventories = current_user.inventories
-    @trader_inventories = Inventory.where(user_id: params[:trader_id])
     @trader = User.find(params[:trader_id])
-    @trade = Trade.new
+    if !@trader.infected
+      @base_trader_inventories = current_user.inventories
+      @trader_inventories = Inventory.where(user_id: params[:trader_id])
+      @trade = Trade.new
+    else
+      redirect_to users_survivors_index_path, alert: 'Infected Survivor can not trade.'
+    end
   end
 
   def create

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Trade < ApplicationRecord
-  # before_create :confirm_trade
   enum status: { pending: 0, accepted: 1, rejected: 2, canceled: 3 }
 
   belongs_to :base_trader, class_name: 'User'
