@@ -6,6 +6,8 @@ class TradesController < ApplicationController
   load_and_authorize_resource
   before_action :set_trade, only: [:update]
   before_action :confirm_trade, only: [:create]
+  after_action :trade_initiated_email, only: [:create]
+  after_action :trade_status_email, only: [:update]
 
   def index
     @base_trades = Trade.where(base_trader_id: current_user.id)
@@ -51,5 +53,13 @@ class TradesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def trade_params
     params.require(:trade).permit(:id, :status, :base_trader_id, :trader_id, trade_histories_attributes: {})
+  end
+
+  def trade_initiated_email
+    TradeMailer.with(trade: @trade).trade_initiated_email.deliver_later
+  end
+
+  def trade_status_email
+    TradeMailer.with(trade: @trade).trade_status_email.deliver_later
   end
 end

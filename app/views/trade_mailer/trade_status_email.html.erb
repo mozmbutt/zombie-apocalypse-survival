@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your trade is <%= @trade.status %> </h1>
+    <p>
+      Trader: <%= @trade.trader.name %>.<br>
+      Trader Email: <%= @trade.trader.email %>.<br>
+      Infected Status: <%= @trade.trader.infected %>.<br>
+      Trade Status: <%= @trade.status %>.<br>
+    </p>
+  </body>
+</html>

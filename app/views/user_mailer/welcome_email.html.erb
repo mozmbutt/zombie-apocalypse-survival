@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Zombie Apocalypse Survival, <%= @user.name %></h1>
+    <p>
+      You have successfully signed up to Zombie Apocalypse Survival,
+      your username is: <%= @user.email %>.<br>
+    </p>
+    <h3>Your informations you provided:</h3>
+    <p>
+      Your email is: <%= @user.email %>.<br>
+      Your age is: <%= @user.age %>.<br>
+      Your gender is: <%= @user.gender %>.<br>
+      Your role is: <%= @user.role %>.<br>
+    </p>
+
+    <h3>Your selected inventory:</h3>
+    <% @inventories.each do |inventory| %>
+					<p><%= inventory.item.name %>: <%= inventory.stock %> in stock</p><br>
+    <% end %>
+
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

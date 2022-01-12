@@ -13,7 +13,9 @@
   <%= form.hidden_field :base_trader_id, value:current_user.id %>
   <%= form.hidden_field :trader_id, value:@trader.id %>
 
-  <%= render 'trader_inventories', form: form, trade: trade, inventories: @base_trader_inventories, trader_name: 'your' %>
-  <%= render 'trader_inventories', form: form, trade: trade, inventories: @trader_inventories, trader_name: @trader.name %>
- 
+  <%= render 'trader_inventories', form: form, trade: trade, inventories: @base_trader_inventories, trader: current_user %>
+  <%= render 'trader_inventories', form: form, trade: trade, inventories: @trader_inventories, trader: @trader %>
+  <div class="actions">
+    <%= form.submit 'Send Offer', class:"btn btn-success form-control btn-lg" %>
+  </div>
 <% end %>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your trade request sent to <%= @trade.trader.name %> </h1>
+    <p>
+      Your trade request successfully sent.<br>
+      Trader: <%= @trade.trader.name %>.<br>
+      Status: <%= @trade.status %>.<br>
+    </p>
+
+    <h3>Inventory you offered:</h3>
+    <table border='1' cellpadding='10'>
+			<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantity</th>
+					</tr>
+			</thead>
+
+			<tbody>
+					<% @base_trade_histories.each do |trade_history| %>
+						<tr>
+								<td><%= trade_history.item.name %></td>
+								<td><%= trade_history.quantity %></td>
+						</tr>
+					<% end %>
+			</tbody>
+    </table>
+
+		<h3>Inventory you want:</h3>
+    <table border='1' cellpadding='10'>
+			<thead>
+					<tr>
+					<th>Item</th>
+					<th>Quantity</th>
+					</tr>
+			</thead>
+
+			<tbody>
+					<% @trade_histories.each do |trade_history| %>
+					<tr>
+							<td><%= trade_history.item.name %></td>
+							<td><%= trade_history.quantity %></td>
+					</tr>
+					<% end %>
+			</tbody>
+    </table>
+
+    <p>You will be get updated about status of trade!</p>
+  </body>
+</html>
