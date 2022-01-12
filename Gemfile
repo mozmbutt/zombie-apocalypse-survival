@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'ransack'
 # Use Devise as authentication
 gem 'devise'
+# Use for Image and file storage
+gem 'cloudinary'
 
 # allows to define the rules to access different objects
 gem 'cancancan'
