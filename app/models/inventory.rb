@@ -5,6 +5,10 @@ class Inventory < ApplicationRecord
 
   belongs_to :user
   belongs_to :item
+  belongs_to :trade_history, class_name: 'TradeHistory',
+                             foreign_key: :item_id,
+                             optional: true,
+                             inverse_of: :inventory
 
   ransacker :stock do
     Arel.sql("to_char(\"#{table_name}\".\"stock\", '99999')")

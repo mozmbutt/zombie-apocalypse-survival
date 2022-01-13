@@ -26,7 +26,7 @@ class TradesController < ApplicationController
   end
 
   def create
-    @trade = Trade.create(trade_params)
+    @trade = Trade.new(trade_params)
     if @trade.save!
       redirect_to trades_path, notice: 'Trade Initiated.'
     else

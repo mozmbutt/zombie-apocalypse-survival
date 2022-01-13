@@ -46,12 +46,20 @@ class User < ApplicationRecord
   end
 
   def self.infected_percentage
-    infected_survivors = survivor.infected(true).count
-    (infected_survivors * 100) / total_survivors
+    if !total_survivors.zero?
+      infected_survivors = survivor.infected(true).count
+      (infected_survivors * 100) / total_survivors
+    else
+      0
+    end
   end
 
   def self.non_infected_percentage
-    non_infected_survivors = survivor.infected(false).count
-    (non_infected_survivors * 100) / total_survivors
+    if !total_survivors.zero?
+      non_infected_survivors = survivor.infected(false).count
+      (non_infected_survivors * 100) / total_survivors
+    else
+      0
+    end
   end
 end

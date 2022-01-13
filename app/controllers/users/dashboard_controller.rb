@@ -21,10 +21,10 @@ module Users
     private
 
     def check_role
-      unless current_user.admin?
-        redirect_to users_dashboard_index_path,
-                    alert: 'You are notauthenticated for view reports!'
-      end
+      return unless current_user.survivor?
+
+      redirect_to users_dashboard_index_path,
+                  alert: 'You are notauthenticated for view reports!'
     end
   end
 end
