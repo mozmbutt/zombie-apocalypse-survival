@@ -6,8 +6,8 @@ class TradesController < ApplicationController
   load_and_authorize_resource
   before_action :set_trade, only: [:update]
   before_action :confirm_trade, only: [:create]
-  after_action :trade_initiated_email, only: [:create]
-  after_action :trade_status_email, only: [:update]
+  # after_action :trade_initiated_email, only: [:create]
+  # after_action :trade_status_email, only: [:update]
 
   def index
     @base_trades = Trade.where(base_trader_id: current_user.id)

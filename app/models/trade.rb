@@ -14,7 +14,7 @@ class Trade < ApplicationRecord
     attributes['quantity'].to_i.zero? || attributes['quantity'].blank?
   end
 
-  def user_trade_histories(user_id)
+  def user_trade_histories_debit(user_id)
     trade_histories.where(user_id: user_id).includes(:inventory).where(inventory: { user_id: user_id })
   end
 
@@ -22,12 +22,12 @@ class Trade < ApplicationRecord
     trade_histories.where(user_id: user_id).includes(:inventory).where.not(inventory: { user_id: user_id })
   end
 
-  def base_trader_histories
-    user_trade_histories(base_trader_id)
+  def base_trader_histories_debit
+    user_trade_histories_debit(base_trader_id)
   end
 
-  def trader_histories
-    user_trade_histories(trader_id)
+  def trader_histories_debit
+    user_trade_histories_debit(trader_id)
   end
 
   def base_trader_histories_credit
@@ -39,14 +39,13 @@ class Trade < ApplicationRecord
   end
 
   def trading_transection
-    @base_trader_histories = base_trader_histories
-    @trader_histories = trader_histories
+    @base_trader_histories_debit = base_trader_histories_debit
+    @trader_histories_debit = trader_histories_debit
     @base_trader_histories_credit = base_trader_histories_credit
     @trader_histories_credit = trader_histories_credit
-
     Trade.transaction do
-      debit_stock(@base_trader_histories) # minus stock from base_trader
-      debit_stock(@trader_histories) # minus stock from trader
+      debit_stock(@base_trader_histories_debit) # minus stock from base_trader
+      debit_stock(@trader_histories_debit) # minus stock from trader
 
       credit_stock(@base_trader_histories_credit) # add stock to trader
       credit_stock(@trader_histories_credit) # add stock to base_tradertrader
