@@ -3,6 +3,9 @@
 class Trade < ApplicationRecord
   enum status: { pending: 0, accepted: 1, rejected: 2, canceled: 3 }
 
+  after_commit :trade_initiated_email, on: :create
+  after_commit :trade_status_email, on: :update
+
   belongs_to :base_trader, class_name: 'User'
   belongs_to :trader, class_name: 'User'
 
@@ -68,5 +71,13 @@ class Trade < ApplicationRecord
       new_stock = inventory_item.stock + t_history.quantity
       inventory_item.update(stock: new_stock)
     end
+  end
+
+  def trade_initiated_email
+    TradeMailer.with(trade: self).trade_initiated_email.deliver_later
+  end
+
+  def trade_status_email
+    TradeMailer.with(trade: self).trade_status_email.deliver_later
   end
 end

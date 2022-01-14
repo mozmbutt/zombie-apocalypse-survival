@@ -5,6 +5,8 @@ class User < ApplicationRecord
   validates_associated :locations
   validates_associated :inventories
 
+  after_commit :welcome_email, on: :create
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -61,5 +63,9 @@ class User < ApplicationRecord
     else
       0
     end
+  end
+
+  def welcome_email
+    UserMailer.with(user: self).welcome_email.deliver_later
   end
 end

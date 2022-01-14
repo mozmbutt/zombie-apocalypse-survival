@@ -24,7 +24,7 @@ module Tradable
   def calculate_trade_points(trader_items)
     trader_points = 0
     trader_items.each do |item|
-      trader_points += Item.find(item[:item_id])[:points].to_i * item[:quantity].to_i
+      trader_points += item[:item_points].to_i * item[:quantity].to_i
     end
     trader_points
   end

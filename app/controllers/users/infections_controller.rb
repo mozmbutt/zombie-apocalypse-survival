@@ -2,6 +2,8 @@
 
 module Users
   class InfectionsController < ApplicationController
+    before_action :authenticate_user!
+    load_and_authorize_resource
     def create
       @infection = Infection.new(infection_params)
       redirect_to users_survivors_index_path, notice: 'Thank you for reporting survivor !' if @infection.save

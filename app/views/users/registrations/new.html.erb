@@ -59,7 +59,7 @@
                 </h3>
                 <hr>
 
-                <% @items.each do |item| %>
+                <% all_items.each do |item| %>
                   <%= f.fields_for :inventories, resource.inventories.build do |inventories_fields| %>
                     Stock of <%= item.name %> ( <%= item.points %> points ) 
                     <%= inventories_fields.number_field :stock, class:"form-control" %>

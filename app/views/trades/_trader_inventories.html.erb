@@ -14,6 +14,7 @@
                     <%= th_fields.number_field :quantity, :min => 0, :max => inventory.stock, class:"form-control" %>
                     <%= inventory.stock %> in stock 
                     <%= th_fields.hidden_field :item_id, value:inventory.item.id %>
+                    <%= th_fields.hidden_field :item_points, value:inventory.item.points %>
                     <%= th_fields.hidden_field :user_id, value:trader.id %>
                     <br>
                     <br>

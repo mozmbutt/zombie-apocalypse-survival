@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Inventory < ApplicationRecord
-  validates :stock, presence: true
+  validates :stock, presence: true, numericality: { only_float: true }
 
   belongs_to :user
   belongs_to :item
