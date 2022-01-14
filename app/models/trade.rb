@@ -22,7 +22,7 @@ class Trade < ApplicationRecord
   end
 
   def user_trade_histories_credit(user_id)
-    trade_histories.where(user_id: user_id).includes(:inventory).where.not(inventory: { user_id: user_id })
+    trade_histories.where.not(user_id: user_id).includes(:inventory).where(inventory: { user_id: user_id })
   end
 
   def base_trader_histories_debit
@@ -44,6 +44,7 @@ class Trade < ApplicationRecord
   def trading_transection
     @base_trader_histories_debit = base_trader_histories_debit
     @trader_histories_debit = trader_histories_debit
+
     @base_trader_histories_credit = base_trader_histories_credit
     @trader_histories_credit = trader_histories_credit
     Trade.transaction do

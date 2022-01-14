@@ -57,7 +57,7 @@
               <td><%= trade.base_trader.name %></td>
               <td><%= trade.trader.name %></td>
               <td><%= trade.status %></td>
-              <td><%= link_to 'Show History', trade_trade_histories_path(trade) %></td>
+              <td><%= link_to 'Show History', trade_trade_histories_path(trade), class:"btn btn-info" %></td>
               <% if trade.status == 'pending'%>
               <td><%= link_to 'Reject Trade', trade_path(:id => trade.id, :status => 'rejected'), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-warning" %></td>
               <td><%= link_to 'Accept Trade', trade_path(:id => trade.id, :status => 'accepted'), method: :put, data: { confirm: 'Are you sure?' }, class:"btn btn-success" %></td>
