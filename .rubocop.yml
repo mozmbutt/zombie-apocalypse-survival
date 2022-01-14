@@ -10,6 +10,8 @@ AllCops:
   TargetRailsVersion: 5.2
   Exclude:
     - 'db/schema.rb'
+    - 'db/migrate/20211231102005_create_active_storage_tables.active_storage.rb'
+    - 'config/initializers/devise.rb'
     - 'node_modules/**/*'
     - 'vendor/bundle/**/*'
     - 'bin/**/*'
