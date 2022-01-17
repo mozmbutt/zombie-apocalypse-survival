@@ -3,7 +3,8 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  # show signed in survivor locations track back
+  before_action :check_infection, only: %i[new create]
+
   def index
     @locations = current_user.locations
   end
@@ -28,5 +29,13 @@ class LocationsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def location_params
     params.require(:location).permit(:user_id, :lat, :lng, :current)
+  end
+
+  def check_infection
+    return unless current_user.infected?
+
+    respond_to do |format|
+      format.html { redirect_to locations_path, notice: 'You are infected, Cant change your location !' }
+    end
   end
 end

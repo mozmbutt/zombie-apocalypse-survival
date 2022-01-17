@@ -15,6 +15,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'vendor/bundle/**/*'
     - 'bin/**/*'
+    - 'app/models/infection.rb'
     
 Layout/LineLength:
   Max: 120

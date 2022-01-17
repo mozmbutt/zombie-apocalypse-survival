@@ -53,18 +53,19 @@ ActiveRecord::Schema.define(version: 2022_01_03_115004) do
   end
 
   create_table "inventories", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "item_id"
-    t.integer "stock"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "stock", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_inventories_on_item_id"
+    t.index ["user_id", "item_id"], name: "index_apps_on_user_id_and_item_id", unique: true
     t.index ["user_id"], name: "index_inventories_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.integer "points"
+    t.string "name", null: false
+    t.integer "points", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -80,9 +81,9 @@ ActiveRecord::Schema.define(version: 2022_01_03_115004) do
   end
 
   create_table "trade_histories", force: :cascade do |t|
-    t.bigint "trade_id"
-    t.bigint "item_id"
-    t.bigint "user_id"
+    t.bigint "trade_id", null: false
+    t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
     t.integer "quantity", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -102,14 +103,14 @@ ActiveRecord::Schema.define(version: 2022_01_03_115004) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.integer "age", null: false
-    t.string "gender", default: "", null: false
+    t.string "name", default: "Survivor", null: false
+    t.integer "age", default: 13, null: false
+    t.string "gender", default: "other", null: false
     t.string "photo"
     t.integer "role", default: 0, null: false
     t.boolean "infected", default: false, null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "email", null: false
+    t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

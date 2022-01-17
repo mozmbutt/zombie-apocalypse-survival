@@ -15,7 +15,8 @@
             <tbody>
                 <% @items_average_report.each do |item| %>
                 <tr>
-                    <td><%= item.to_a[0][1] %> Avg stock of <%= item.to_a[0][0] %> held by per survivor</td>
+                    <td>
+                      <b><%= item.first %></b> avg stock of <b> <%= item.last.to_i %> </b> held by per survivor</td>
                 </tr>
                 <% end %>
             </tbody>

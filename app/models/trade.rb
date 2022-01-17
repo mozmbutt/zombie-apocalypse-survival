@@ -44,15 +44,13 @@ class Trade < ApplicationRecord
   def trading_transection
     @base_trader_histories_debit = base_trader_histories_debit
     @trader_histories_debit = trader_histories_debit
-
     @base_trader_histories_credit = base_trader_histories_credit
     @trader_histories_credit = trader_histories_credit
     Trade.transaction do
       debit_stock(@base_trader_histories_debit) # minus stock from base_trader
+      credit_stock(@trader_histories_credit) # add stock to trader
       debit_stock(@trader_histories_debit) # minus stock from trader
-
       credit_stock(@base_trader_histories_credit) # add stock to trader
-      credit_stock(@trader_histories_credit) # add stock to base_tradertrader
     end
   end
 
@@ -61,7 +59,7 @@ class Trade < ApplicationRecord
     histories.each do |t_history|
       inventory_item = t_history.inventory
       new_stock = inventory_item.stock - t_history.quantity
-      inventory_item.update(stock: new_stock)
+      inventory_item.update!(stock: new_stock)
     end
   end
 
@@ -70,7 +68,7 @@ class Trade < ApplicationRecord
     histories.each do |t_history|
       inventory_item = t_history.inventory
       new_stock = inventory_item.stock + t_history.quantity
-      inventory_item.update(stock: new_stock)
+      inventory_item.update!(stock: new_stock)
     end
   end
 

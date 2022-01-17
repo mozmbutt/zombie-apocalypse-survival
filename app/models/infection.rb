@@ -4,10 +4,13 @@ class Infection < ApplicationRecord
   belongs_to :reporter, class_name: 'User'
   belongs_to :report, class_name: 'User', foreign_key: 'reported_id', inverse_of: :reports
 
-  after_create :check_or_mark_infected
+  after_save :check_or_mark_infected
 
   def check_or_mark_infected
-    report_count = report.reports.count
-    report.update(infected: true) if report_count >= 5
+    return unless report.reports.count >= 5
+
+    report.update!(infected: true)
+    report.base_traders.where(status: 'pending').update_all(status: 'canceled')
+    report.traders.where(status: 'pending').update_all(status: 'canceled')
   end
 end
